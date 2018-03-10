@@ -3,6 +3,31 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+- **The Model**: *Student describes their model in detail. This includes the state, actuators and update equations.*
+
+There was two vehicle model explained in classroom - Dynamic and Kinematic Model. The Dynamic Model is more realistic and includes different forces but its hard to work with and requires more computive power. The Kinematic Model is simple easy to work with and less cpu extensive and gives pretty good result. 
+
+We want to capture the state of the vehicle. The state vector is [x, y, psi, v, cte, epsi] where x and y are position cordinates of vehicle. psi is the orientation of vehicle. cte is cross-track error and epsi is error in psi. 
+
+The vehicle is controlled by steering and applying accleration. These are the two actuators. The steer is in range of (-25, 25) and acceleration in range of (-1, 1).
+
+The vehicle model using the current state and vehicle actuators to predict the next state. Below are the equations for the vehicle models.
+
+![equations](./eqns.png)
+
+- **Timestep Length and Elapsed Duration (N & dt)**: *Student discusses the reasoning behind the chosen N (timestep length) and dt (elapsed duration between timesteps) values. Additionally the student details the previous values tried.*
+
+I choose value of N = 10 and dt = 0.1 and i just hit and trial method and made sure that we are seeing enough is future and not too much enough that its becoming cpu intensive. 
+
+- **Polynomial Fitting and MPC Preprocessing**: *A polynomial is fitted to waypoints. If the student preprocesses waypoints, the vehicle state, and/or actuators prior to the MPC procedure it is described.*
+
+The waypoints are preprocessed by transforming them to the vehicle's perspective . This simplifies the process to fit a polynomial to the waypoints because the vehicle's x and y coordinates are now at the origin (0, 0) and the orientation angle is also zero. 
+
+- **Model Predictive Control with Latency**: *The student implements Model Predictive Control that handles a 100 millisecond latency. Student provides details on how they deal with latency.*
+
+The mpc controller deals with latency by updating the initial state using the vehicle model. The dt used during this state update is equal to latency which in our case is 100 millisecond.
+
+
 ## Dependencies
 
 * cmake >= 3.5
